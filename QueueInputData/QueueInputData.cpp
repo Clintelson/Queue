@@ -4,10 +4,10 @@
 #include <queue>
 #include <thread>
 #include <chrono>
-#include <limits>
 
 int main() {
 
+    //Array
     std::string songsInput[1000];
 
     int songSize;
@@ -16,16 +16,19 @@ int main() {
 
     while (true) {
         if (!(std::cin >> songSize)) {
-            std::cout << "Invalid!" << std::endl;
-                std::cin.clear();
-                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                exit(0);
+            std::cout << "Invalid! Please input numbers only!" << std::endl;
+            std::cout << std::endl;
+                std::cout << "How many songs do you want to input? : ";
+                    std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                continue;
         }
 
         break;
+
     }
 
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         
         std::cout << "" << std::endl;
     std::cout << "Input songs: " << std::endl;
@@ -50,14 +53,32 @@ int main() {
         std::cout << "" << std::endl;
             std::cout << "Delete one song[1]; Delete all songs[2]; Add more songs[3]; Skip[4];" << std::endl;
                 std::cout << "> ";
-            std::cin >> chc;
-        std::cout << "" << std::endl;
+                while (true) {
+                    if (!(std::cin >> chc)) {
+                        std::cout << "Invalid! Enter the choices only 1, 2, 3, and 4" << std::endl;
+                            std::cout << "> ";
+                                std::cin.clear();
+                        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                                continue;
+                    }
+                    break;
+                }
+        std::cout << std::endl;
 
     if (chc == 1) {
 
         int indexToDelete;
             std::cout << "Enter the number of the song to delete (1 to " << songSize << "): ";
-                std::cin >> indexToDelete;
+            while (true) {
+                if (!(std::cin >> indexToDelete)) {
+                    std::cout << "Invalid!" << std::endl;
+                  std::cout << "Enter the number of the song to delete (1 to " << songSize << "): ";
+                        std::cin.clear();
+                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                        continue;
+                }
+                break;
+            }
 
         if (indexToDelete >= 1 && indexToDelete <= songSize) {
             for (int i = indexToDelete - 1; i < songSize - 1; ++i) {
@@ -123,6 +144,7 @@ int main() {
             std::cout << std::setw(10) << "Song " << i + 1 << ": " << songsInput[i] << std::endl;
         }
 
+        //Queue
     std::queue<std::string> songsQueue;
 
     int songNum;
